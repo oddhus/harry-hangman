@@ -15,5 +15,13 @@ export default createMuiTheme({
         secondary: {
             main: hpGold
         }
+    },
+    typography: {
+      info: {
+          fontFamily: "Roboto",
+          textTransform: "none",
+          fontWeight: 700,
+          fontSize: "1rem"
+      }
     }
 })
