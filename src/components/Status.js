@@ -11,13 +11,11 @@ const useStyles = makeStyles(theme => ({
   },
   paper:{
     padding: theme.spacing(1),
-    textAlign: "center",
-    backgroundColor: "#606060"
+    textAlign: "center"
   },
   paperStatus:{
     padding: theme.spacing(1),
     textAlign: "center",
-    backgroundColor: "#606060",
     textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
 
     color: props => props.color

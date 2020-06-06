@@ -26,7 +26,14 @@ function Word({hiddenWord}) {
 
   const [letterArray, setLetterArray] = useState([])
 
-  useEffect(() => { setLetterArray(hiddenWord) }, [hiddenWord]);
+  useEffect(() => {
+    // let words = []
+    // let index = 0
+    // hiddenWord.forEach((letter, i) => {
+
+    // });
+    setLetterArray(hiddenWord) 
+  }, [hiddenWord]);
 
   return (
     <Grid item xs={12}>
@@ -41,7 +48,6 @@ function Word({hiddenWord}) {
                 </Paper>
               </Grid>
           ))}
-          
         </Grid>
         </Paper>
     </Grid>

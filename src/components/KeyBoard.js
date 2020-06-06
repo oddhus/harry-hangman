@@ -19,7 +19,7 @@ export default function Keyboard(props) {
 
   useEffect(() => {
     if(!props.win && !props.loss){
-            setClicked([])
+      setClicked([])
     }
   }, [props.win, props.loss])
 
