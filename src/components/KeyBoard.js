@@ -17,36 +17,32 @@ export default function Keyboard(props) {
 
   const [clicked, setClicked] = useState([])
 
-    // useEffect(() => {
-    //     if(!props.win && !props.loss){
-    //         setClicked([])
-    //     }
-    // }, [props.win, props.loss])
-  
-    console.log(clicked)
+  useEffect(() => {
+    if(!props.win && !props.loss){
+            setClicked([])
+    }
+  }, [props.win, props.loss])
 
   return (
-        <Grid item xs={12} spacing={3}>
-          <Box p={[2,3,4]}>
-          <Grid container justify="center" spacing={4}>
-            {letters.map((letter, i) => (
-                <Box key={`${letter}${i}`} p={[0.5, 1, 2]}>
-                  <Button
-                    className={classes.paper}
-                    variant="outlined"
-                    size="small"
-                    fullWidth={true}
-                    onClick={() => console.log(letter)}
-                    // disabled={clicked.includes(letter) ? true : false}
-                    >
-                    <Typography variant="h5">{letter}</Typography>
-                  </Button>
-                </Box>
-                
-            ))}
-          </Grid>  
-          </Box>  
+    <Box p={[3, 4, 5]}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={4}>
+          {letters.map((letter, i) => (
+            <Box key={`${letter}${i}`} p={[0.5, 0.5, 1]}>
+              <Button
+                className={classes.paper}
+                variant="outlined"
+                size="small"
+                fullWidth={true}
+                onClick={() => {props.onLetterClick(letter); setClicked(clicked => [...clicked, letter])}}
+                disabled={clicked.includes(letter) ? true : false}
+              >
+                <Typography variant="h6">{letter}</Typography>
+              </Button>
+            </Box>
+          ))}
         </Grid>
-     
+      </Grid>
+    </Box>
   )
 }
