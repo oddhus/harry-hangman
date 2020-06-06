@@ -1,30 +1,18 @@
 import React from 'react'
-import { Container } from '@material-ui/core'
+import { Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
-import SimpleContainer from '../components/ui/SimpleContainer';
 import Status from '../components/Status';
-
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  title: {
-    fontSize: 14,
-    alignContent: "center"
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
+import Word from '../components/Word';
+import Keyboard from '../components/KeyBoard';
+import NavBar from '../components/Navbar';
 
 function Game() {
-  const classes = useStyles();
   return (
-    <Container maxWidth="sm">
-      <Status/>
-      
+    <Container maxWidth="md" disableGutters>
+        <Status/>
+        <Word />
+        <Keyboard/>
+        <NavBar/>
     </Container>
   )
 }
