@@ -8,6 +8,7 @@ import getWord from '../Words/words'
 
 
 function Game() {
+  const [color, setColor] = useState("#FAFAD2")
   const [loadingWord, setloadingWord] = useState(true)
   const [word, setword] = useState([])
   const [wrongGuesses, setWrongGuesses] = useState([])
@@ -49,6 +50,19 @@ function Game() {
       setStarted(false)
     }
   }, [correctGuesses, attempts, word, started, streak])
+
+  useEffect(() => {
+    if (attempts >= 4) {
+      setColor("#006400")
+    } else if (attempts >= 3) {
+      setColor("#6B8E23")
+    } else if (attempts >= 2) {
+      setColor("#FF8C00")
+    } else {
+      setColor("#7f0000")
+    }
+
+  }, [attempts])
 
   function showAnswer() {
     setLoss(true)
@@ -93,7 +107,7 @@ function Game() {
 
   return (
     <Container maxWidth="md" disableGutters>
-        <Status attempts={attempts} streak={streak}/>
+        <Status attempts={attempts} streak={streak} color={color}/>
         <Word hiddenWord={hiddenWord}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
         <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>

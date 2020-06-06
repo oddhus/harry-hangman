@@ -31,7 +31,7 @@ export default function Keyboard(props) {
             <Box key={`${letter}${i}`} p={[0.5, 0.5, 1]}>
               <Button
                 className={classes.paper}
-                variant="outlined"
+                variant="contained"
                 size="small"
                 fullWidth={true}
                 onClick={() => {props.onLetterClick(letter); setClicked(clicked => [...clicked, letter])}}

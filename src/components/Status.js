@@ -12,6 +12,15 @@ const useStyles = makeStyles(theme => ({
   paper:{
     padding: theme.spacing(1),
     textAlign: "center",
+    backgroundColor: "#606060"
+  },
+  paperStatus:{
+    padding: theme.spacing(1),
+    textAlign: "center",
+    backgroundColor: "#606060",
+    textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+
+    color: props => props.color
   },
   header:{
     backgroundColor: theme.palette.common.hpRed,
@@ -21,11 +30,10 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function Status(props) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [loss, setLoss] = useState(props.loss)
   const [win, setWin] = useState(props.win)
   const [attempts, setAttempts] = useState(props.attempts)
-  const [color, setColor] = useState("#FAFAD2")
   const [streak, setStreak] = useState(props.streak)
 
   useEffect(() => {
@@ -44,19 +52,6 @@ export default function Status(props) {
     setAttempts(props.attempts)
   }, [props.attempts])
 
-  useEffect(() => {
-    if (props.attempts >= 4) {
-      setColor("#006400")
-    } else if (props.attempts >= 3) {
-      setColor("#6B8E23")
-    } else if (props.attempts >= 2) {
-      setColor("#FF8C00")
-    } else {
-      setColor("#7f0000")
-    }
-
-  }, [props.attempts])
-
   return (
       <Grid item xs={12}>
         <Paper className={classes.paper} elevation={0}>
@@ -73,7 +68,7 @@ export default function Status(props) {
                 <Paper className={classes.header} square>
                   <Typography className={classes.infoHeader}>Status</Typography>
                 </Paper>
-                <Paper className={classes.paper} square>
+                <Paper className={classes.paperStatus} square>
                   <Typography className={classes.infoMessage}>{attempts} forsøk igjen</Typography>
                 </Paper>
               </Grid>

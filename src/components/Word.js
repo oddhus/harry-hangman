@@ -36,7 +36,7 @@ function Word({hiddenWord}) {
             letter === ' ' ?
               <Paper key={`${letter}${i}`} className={classes.paperLetterEmpty} elevation={0} /> :
               <Grid key={`${letter}${i}`}>
-                <Paper className={classes.paperLetter} variant="outlined">
+                <Paper className={classes.paperLetter} variant="outlined" square>
                   <Typography variant="h3">{letter}</Typography>
                 </Paper>
               </Grid>
