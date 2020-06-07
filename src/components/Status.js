@@ -3,35 +3,23 @@ import { Grid, Paper, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
 
 const useStyles = makeStyles(theme => ({
-  infoHeader: {
-    ...theme.typography.h6
-  },
-  infoMessage: {
-    ...theme.typography.h5
-  },
   paper:{
-    padding: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
     textAlign: "center"
   },
-  paperStatus:{
-    padding: theme.spacing(1),
-    textAlign: "center",
-    textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
-
-    color: props => props.color
+  headerStatus:{
+    backgroundColor: props => props.color
   },
-  header:{
-    backgroundColor: theme.palette.common.hpRed,
-    color: theme.palette.common.hpGold
+  headerStreak:{
+    backgroundColor: props => props.streakColor,
   }
+
 }));
 
 
 export default function Status(props) {
   const classes = useStyles(props);
-  const [loss, setLoss] = useState(props.loss)
-  const [win, setWin] = useState(props.win)
-  const [attempts, setAttempts] = useState(props.attempts)
+  const [statusText, setStatusText] = useState("")
   const [streak, setStreak] = useState(props.streak)
 
   useEffect(() => {
@@ -39,35 +27,28 @@ export default function Status(props) {
   }, [props.streak])
 
   useEffect(() => {
-    setLoss(props.loss)
-  }, [props.loss])
+    let text = <Typography variant="h5">{props.attempts} forsøk igjen</Typography>
+    if (props.win){
+      text = <Typography variant="h5">Magisk!</Typography>
+    } else if (props.loss){
+      text = <Typography variant="h5">Trollsnørr! </Typography>
+    }
+    setStatusText(text)
+  }, [props.win, props.loss, props.attempts])
 
-  useEffect(() => {
-    setWin(props.win)
-  }, [props.win])
-
-  useEffect(() => {
-    setAttempts(props.attempts)
-  }, [props.attempts])
-
+  console.log(props.loss)
   return (
       <Grid item xs={12}>
         <Paper className={classes.paper} elevation={0}>
-            <Grid container spacing={4}>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Paper className={classes.header} square>
-                  <Typography className={classes.infoHeader}>Streak</Typography>
-                </Paper>
-                <Paper className={classes.paper} square>
-                  <Typography className={classes.infoMessage}>{streak}</Typography>
+                <Paper className={classes.headerStreak} square>
+                  <Typography variant="h5">Streak: {streak}</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={6}>
-                <Paper className={classes.header} square>
-                  <Typography className={classes.infoHeader}>Status</Typography>
-                </Paper>
-                <Paper className={classes.paperStatus} square>
-                  <Typography className={classes.infoMessage}>{attempts} forsøk igjen</Typography>
+                <Paper className={classes.headerStatus}>
+                  {statusText}
                 </Paper>
               </Grid>
             </Grid>

@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import { Grid, Paper, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
+import Status from './Status';
 
 const useStyles = makeStyles(theme => ({
+  header:{
+    textAlign: "center",
+    backgroundColor: theme.palette.common.hpRed,
+    color: theme.palette.common.hpGold
+  },
   paper:{
-    ...theme.mixins.gutters(),
-    padding: theme.spacing(2),
-    margin: "10px",
-    backgroundColor: theme.palette.common.hpRed
+    padding: theme.spacing(1),
   },
   paperLetter: {
     padding: theme.spacing(0.4),
@@ -17,11 +20,10 @@ const useStyles = makeStyles(theme => ({
   paperLetterEmpty: {
     padding: theme.spacing(1),
     textAlign: "center",
-    backgroundColor: theme.palette.common.hpRed
   }
 }));
 
-function Word({hiddenWord}) {
+function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
   const classes = useStyles();
 
   const [letterArray, setLetterArray] = useState([])
@@ -36,8 +38,9 @@ function Word({hiddenWord}) {
   }, [hiddenWord]);
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12}>  
       <Paper className={classes.paper}>
+        <Status attempts={attempts} streak={streak} color={color} win={win} loss={loss} streakColor={streakColor}/>
         <Grid container justify="center">
           {letterArray.map((letter, i) => (
             letter === ' ' ?
@@ -49,7 +52,7 @@ function Word({hiddenWord}) {
               </Grid>
           ))}
         </Grid>
-        </Paper>
+      </Paper>
     </Grid>
   )
 }
