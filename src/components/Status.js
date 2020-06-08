@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Paper, Typography, Box } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
+import InfoTile from './ui/InfoTile';
 
 const useStyles = makeStyles(theme => ({
   paper:{
     paddingBottom: theme.spacing(1),
     textAlign: "center"
-  },
-  headerStatus:{
-    backgroundColor: props => props.color
-  },
-  headerStreak:{
-    backgroundColor: props => props.streakColor,
   }
-
 }));
 
+const streakColors = ["#fffde7", "#fff9c4", "#fff59d", "#fff176", "#ffee58", "#ffeb3b", "#fdd835", "#fbc02d", "#f9a825", "#f57f17"]
+const attemptColors = ["#ef5350","#ffca28","#d4e157","#d4e157","#9ccc65","#9ccc65"]
 
 export default function Status(props) {
-  const classes = useStyles(props);
+  const classes = useStyles();
   const [statusText, setStatusText] = useState("")
   const [streak, setStreak] = useState(props.streak)
+  const [color, setColor] = useState("#9ccc65")
+  const [streakColor, setStreakColor] = useState("#fffde7")
 
   useEffect(() => {
     setStreak(props.streak)
@@ -36,21 +34,33 @@ export default function Status(props) {
     setStatusText(text)
   }, [props.win, props.loss, props.attempts])
 
-  console.log(props.loss)
+  useEffect(() => {
+    if (props.win){
+      setColor("#c6ff00")
+    } else if (props.loss) {
+      setColor("#ff1744")
+    } else {
+      setColor(attemptColors[props.attempts])
+    }
+  }, [props.attempts, props.win, props.loss])
+
+  useEffect(() => {
+    if (props.streak < streakColors.length) {
+      setStreakColor(streakColors[props.streak])
+    }
+  }, [props.streak])
+
+
   return (
       <Grid item xs={12}>
         <Paper className={classes.paper} elevation={0}>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Paper className={classes.headerStreak} square>
-                  <Typography variant="h5">Streak: {streak}</Typography>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.headerStatus}>
-                  {statusText}
-                </Paper>
-              </Grid>
+              <InfoTile color={streakColor} size={6}>
+                <Typography variant="h5">Streak: {streak}</Typography>
+              </InfoTile>
+              <InfoTile color={color} size={6}>
+                {statusText}
+              </InfoTile>
             </Grid>
           </Paper>           
       </Grid>

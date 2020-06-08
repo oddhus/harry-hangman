@@ -6,10 +6,7 @@ import NavBar from '../components/Navbar';
 import getWord from '../Words/words'
 import Picture from '../components/Picture'
 
-const streakColors = ["#fffde7", "#fff9c4", "#fff59d", "#fff176", "#ffee58", "#ffeb3b", "#fdd835", "#fbc02d", "#f9a825", "#f57f17"]
-
 function Game() {
-  const [color, setColor] = useState("#FAFAD2")
   const [loadingWord, setloadingWord] = useState(true)
   const [word, setword] = useState([])
   const [wrongGuesses, setWrongGuesses] = useState([])
@@ -20,7 +17,6 @@ function Game() {
   const [loss, setLoss] = useState(false)
   const [started, setStarted] = useState(false)
   const [streak, setStreak] = useState(0)
-  const [streakColor, setStreakColor] = useState("grey")
 
   useEffect(() => {
     setword(getWord())
@@ -52,30 +48,6 @@ function Game() {
       setStarted(false)
     }
   }, [correctGuesses, attempts, word, started, streak])
-
-  useEffect(() => {
-    if (win){
-      setColor("#c6ff00")
-    } else if (loss) {
-      setColor("#ff1744")
-    } else {
-      if (attempts >= 4) {
-        setColor("#9ccc65")
-      } else if (attempts >= 3) {
-        setColor("#d4e157")
-      } else if (attempts >= 2) {
-        setColor("#ffca28")
-      } else {
-        setColor("#ef5350")
-      }
-    }
-  }, [attempts, win, loss])
-
-  useEffect(() => {
-    if (streak < streakColors.length) {
-      setStreakColor(streakColors[streak])
-    }
-  }, [streak])
 
   function showAnswer() {
     setLoss(true)
@@ -121,7 +93,7 @@ function Game() {
   return (
     <Container maxWidth="md" disableGutters>
         <Picture attempts={attempts}/>
-        <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} color={color} streakColor={streakColor} win={win} loss={loss}/>
+        <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} win={win} loss={loss}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
         <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>
     </Container>

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
       height: "12em"
     },
     [theme.breakpoints.down("xs")]: {
-      height: "8em"
+      height: "6em"
     }
   }
 }));

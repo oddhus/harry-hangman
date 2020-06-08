@@ -49,12 +49,12 @@ const useStyles = makeStyles(theme => ({
     }    
   },
   logo: {
-    height: "8em",
+    height: "6em",
     [theme.breakpoints.down("md")]: {
-      height: "7em"
+      height: "5em"
     },
     [theme.breakpoints.down("xs")]: {
-      height: "5.5em"
+      height: "4em"
     }
   },
   logoContainer: {
@@ -86,12 +86,12 @@ const useStyles = makeStyles(theme => ({
   },
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    marginBottom: "3em",
+    marginBottom: "1.7em",
     [theme.breakpoints.down("md")]: {
-      marginBottom: "2em"
+      marginBottom: "1.2em"
     },
     [theme.breakpoints.down("xs")]: {
-      marginBottom: "1.25em"
+      marginBottom: "1em"
     }
   }
 }))
@@ -106,7 +106,7 @@ function Header() {
   const classes = useStyles()
   const theme = useTheme()
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
-  const matches = useMediaQuery(theme.breakpoints.down("md"))
+  const matches = useMediaQuery(theme.breakpoints.down("sm"))
 
   const [value, setValue] = useState(0)
   const [openDrawer, setOpenDrawer] = useState(false)
