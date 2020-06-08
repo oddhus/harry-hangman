@@ -20,8 +20,8 @@ let theme = createMuiTheme({
 
 theme.typography.h5 = {
   ...theme.typography.h5,
-  fontWeight: 700,
-  fontSize: '1.0rem',
+  fontWeight: 500,
+  fontSize: '1.3rem',
   '@media (min-width:600px)': {
     fontSize: '1.3rem',
   },
@@ -32,6 +32,7 @@ theme.typography.h5 = {
 
 theme.typography.h3 = {
   ...theme.typography.h3,
+  fontWeight: 700,
   fontSize: '1.1rem',
   '@media (min-width:600px)': {
     fontSize: '1.5rem',

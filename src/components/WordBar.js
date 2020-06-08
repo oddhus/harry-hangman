@@ -46,7 +46,7 @@ function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
             letter === ' ' ?
               <Paper key={`${letter}${i}`} className={classes.paperLetterEmpty} elevation={0} /> :
               <Grid key={`${letter}${i}`}>
-                <Paper className={classes.paperLetter} variant="outlined" square>
+                <Paper className={classes.paperLetter} variant="outlined">
                   <Typography variant="h3">{letter}</Typography>
                 </Paper>
               </Grid>
