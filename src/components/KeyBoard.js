@@ -24,16 +24,14 @@ export default function Keyboard(props) {
   }, [props.win, props.loss])
 
   return (
-    <Box pt={[2, 4, 5]}>
+    <Box pt={[2, 2.5, 3]}>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={2}>
           {letters.map((letter, i) => (
             <Box key={`${letter}${i}`} p={[0.3, 0.5, 1]}>
               <Button
-                fullWidth
                 className={classes.paper}
                 variant="contained"
-                size="small"
                 fullWidth={true}
                 onClick={() => {props.onLetterClick(letter); setClicked(clicked => [...clicked, letter])}}
                 disabled={clicked.includes(letter) ? true : false}

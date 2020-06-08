@@ -15,9 +15,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   media: {
-    height: "14em",
+    height: "12em",
     [theme.breakpoints.down("md")]: {
-      height: "12em"
+      height: "10em"
     },
     [theme.breakpoints.down("xs")]: {
       height: "6em"

@@ -9,6 +9,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.common.hpRed,
     color: theme.palette.common.hpGold
   },
+  letterContainer: {
+    marginTop: "0.2rem",
+    marginBottom: "0.2rem"
+  },
   paper:{
     padding: theme.spacing(1),
   },
@@ -18,8 +22,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.common.hpGold
   },
   paperLetterEmpty: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
     textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(1.5),
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: theme.spacing(0.5)
+    },
   }
 }));
 
@@ -38,14 +48,15 @@ function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
   }, [hiddenWord]);
 
   return (
-    <Grid item xs={12}>  
+    <Box pt={[1, 1.5, 2]}>
+      <Grid item xs={12}>  
       <Paper className={classes.paper}>
         <Status attempts={attempts} streak={streak} color={color} win={win} loss={loss} streakColor={streakColor}/>
         <Grid container justify="center">
           {letterArray.map((letter, i) => (
             letter === ' ' ?
               <Paper key={`${letter}${i}`} className={classes.paperLetterEmpty} elevation={0} /> :
-              <Grid key={`${letter}${i}`}>
+              <Grid key={`${letter}${i}`} className={classes.letterContainer}>
                 <Paper className={classes.paperLetter} variant="outlined">
                   <Typography variant="h3">{letter}</Typography>
                 </Paper>
@@ -54,6 +65,8 @@ function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
         </Grid>
       </Paper>
     </Grid>
+
+    </Box>
   )
 }
 

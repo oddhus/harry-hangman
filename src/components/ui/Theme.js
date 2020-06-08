@@ -20,22 +20,33 @@ let theme = createMuiTheme({
 
 theme.typography.h5 = {
   ...theme.typography.h5,
-  fontWeight: 500,
-  fontSize: '1.3rem',
+  fontSize: '1.2rem',
   '@media (min-width:600px)': {
-    fontSize: '1.3rem',
+    fontSize: '1.4rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '2.1rem',
+    fontSize: '1.8rem',
+  },
+};
+
+theme.typography.h6 = {
+  ...theme.typography.h6,
+  fontWeight: 500,
+  fontSize: '1.0rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.2rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.6rem',
   },
 };
 
 theme.typography.h3 = {
   ...theme.typography.h3,
   fontWeight: 700,
-  fontSize: '1.1rem',
+  fontSize: '1.0rem',
   '@media (min-width:600px)': {
-    fontSize: '1.5rem',
+    fontSize: '1.2rem',
   },
   [theme.breakpoints.up('md')]: {
     fontSize: '2.4rem',

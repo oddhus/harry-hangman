@@ -16,7 +16,7 @@ const attemptColors = ["#ef5350","#ffca28","#d4e157","#d4e157","#9ccc65","#9ccc6
 export default function Status(props) {
   const classes = useStyles();
   const [statusText, setStatusText] = useState("")
-  const [streak, setStreak] = useState(props.streak)
+  const [streak, setStreak] = useState()
   const [color, setColor] = useState("#9ccc65")
   const [streakColor, setStreakColor] = useState("#fffde7")
 
