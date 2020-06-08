@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
-import InfoTile from './ui/InfoTile';
+import InfoTile from './InfoTile';
 
 const useStyles = makeStyles(theme => ({
   paper:{
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const streakColors = ["#fffde7", "#fff9c4", "#fff59d", "#fff176", "#ffee58", "#ffeb3b", "#fdd835", "#fbc02d", "#f9a825", "#f57f17"]
-const attemptColors = ["#ef5350","#ffca28","#d4e157","#d4e157","#9ccc65","#9ccc65"]
+const attemptColors = ["#ef5350","#ef5350","#ffca28","#d4e157","#d4e157","#9ccc65"]
 
 export default function Status(props) {
   const classes = useStyles();

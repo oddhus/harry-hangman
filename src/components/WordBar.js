@@ -4,11 +4,6 @@ import { makeStyles } from '@material-ui/core/styles/'
 import Status from './Status';
 
 const useStyles = makeStyles(theme => ({
-  header:{
-    textAlign: "center",
-    backgroundColor: theme.palette.common.hpRed,
-    color: theme.palette.common.hpGold
-  },
   letterContainer: {
     marginTop: "0.2rem",
     marginBottom: "0.2rem"
@@ -39,11 +34,6 @@ function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
   const [letterArray, setLetterArray] = useState([])
 
   useEffect(() => {
-    // let words = []
-    // let index = 0
-    // hiddenWord.forEach((letter, i) => {
-
-    // });
     setLetterArray(hiddenWord) 
   }, [hiddenWord]);
 

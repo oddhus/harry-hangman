@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Button, useScrollTrigger, Tabs, Tab, useMediaQuery, Ic
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 
-import logo from '../../assets/HarryHangmanLogo.svg'
+import logo from '../assets/HarryHangmanLogo.svg'
 
 function ElevationScroll(props) {
   const { children } = props

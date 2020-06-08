@@ -12,7 +12,7 @@ export default function InfoTile(props) {
     const classes = useStyles(props);
     return (
         <Grid item xs={props.size}>
-            <Paper className={classes.infoTile} square>
+            <Paper className={classes.infoTile}>
                 {props.children}
             </Paper>
         </Grid>
