@@ -5,6 +5,8 @@ import Keyboard from '../components/KeyBoard';
 import NavBar from '../components/Navbar';
 import getWord from '../Words/words'
 import Picture from '../components/Picture'
+import PlayerBar from '../components/PlayerBar'
+
 
 function Game() {
   const [loadingWord, setloadingWord] = useState(true)
@@ -96,6 +98,7 @@ function Game() {
         <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} win={win} loss={loss}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
         <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>
+        <PlayerBar streak={streak}/>
     </Container>
   )
 }

@@ -4,9 +4,15 @@ import { makeStyles } from '@material-ui/core/styles/'
 
 const useStyles = makeStyles(theme => ({
   paper:{
-    padding: theme.spacing(0.5),
+    padding: theme.spacing(1),
     textAlign: "center",
   },
+  button:{
+    display: 'inline-block',
+    padding:0,
+    minHeight: "1.2em",
+    minWidth: "4em",
+  }
 }));
 
 const letters = Array(26).fill(65).map((x,y) => String.fromCharCode(x+y))
@@ -24,15 +30,15 @@ export default function Keyboard(props) {
   }, [props.win, props.loss])
 
   return (
-    <Box pt={[2, 2.5, 3]}>
+    <Box pt={[1, 2.5, 3]}>
       <Grid item xs={12}>
-        <Grid container justify="center" spacing={2}>
+        <Paper className={classes.paper}>
+        <Grid container justify="center" spacing={0}>
           {letters.map((letter, i) => (
-            <Box key={`${letter}${i}`} p={[0.3, 0.5, 1]}>
+            <Box key={`${letter}${i}`} p={[0.3, 0.4, 0.1]}>
               <Button
-                className={classes.paper}
+                className={classes.button}
                 variant="outlined"
-                fullWidth={true}
                 onClick={() => {props.onLetterClick(letter); setClicked(clicked => [...clicked, letter])}}
                 disabled={clicked.includes(letter) ? true : false}
               >
@@ -41,6 +47,7 @@ export default function Keyboard(props) {
             </Box>
           ))}
         </Grid>
+        </Paper>
       </Grid>
     </Box>
   )

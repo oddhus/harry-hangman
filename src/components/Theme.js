@@ -25,7 +25,7 @@ theme.typography.h5 = {
     fontSize: '1.4rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '1.8rem',
+    fontSize: '1.6rem',
   },
 };
 
@@ -37,7 +37,7 @@ theme.typography.h6 = {
     fontSize: '1.2rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '1.6rem',
+    fontSize: '1.4rem',
   },
 };
 
