@@ -48,7 +48,7 @@ export default function LeaderBoard() {
                 {score.username}
               </TableCell>
               <TableCell align="right">{score.streak}</TableCell>
-              <TableCell align="right">{moment().fromNow(score.time.seconds)}</TableCell>
+              <TableCell align="right">{moment.unix(score.time.seconds).fromNow()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
