@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Grid, Button, Box } from '@material-ui/core'
-import PlayerBar from './PlayerBar  '
+import PlayerBar from './PlayerBar'
 
 function NavBar(props) {
 
