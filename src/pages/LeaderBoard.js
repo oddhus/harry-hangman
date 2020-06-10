@@ -17,8 +17,7 @@ export default function LeaderBoard() {
   const [scores, loading, error] = useCollectionDataOnce(
     firebase.db.collection('scores'),
     {
-      snapshotListenOptions: { includeMetadataChanges: true },
-      idField: "username"
+      snapshotListenOptions: { includeMetadataChanges: true }
     }
   )
   if (loading) {
@@ -48,14 +47,12 @@ export default function LeaderBoard() {
                 {score.username}
               </TableCell>
               <TableCell align="right">{score.streak}</TableCell>
-              <TableCell align="right">{moment.unix(score.time.seconds).fromNow()}</TableCell>
+              <TableCell align="right">{moment.unix(score.created.seconds).fromNow()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-
-    </Container>
-    
+    </Container>  
   );
 }

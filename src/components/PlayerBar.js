@@ -21,15 +21,14 @@ export default function PlayerBar() {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            <Button variant="contained" color="secondary" onClick={handleClickOpen}>
                 Lagre Streak
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="form-dialog-title">Lagre Streak</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
+                        Lagre streaken din og kanskje så havner du på leaderborden. Advarsel! Dette vil resette streaken til 0.
                     </DialogContentText>
                     <TextField
                         autoFocus
