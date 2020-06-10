@@ -98,7 +98,7 @@ function Game() {
         <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} win={win} loss={loss}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
         <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>
-        <PlayerBar streak={streak}/>
+        <PlayerBar streak={streak} win={win} loss={loss}/>
     </Container>
   )
 }

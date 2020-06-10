@@ -4,14 +4,13 @@ import { makeStyles } from '@material-ui/core/styles/'
 
 const useStyles = makeStyles(theme => ({
   paper:{
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
     textAlign: "center",
   },
   button:{
-    display: 'inline-block',
-    padding:0,
-    minHeight: "1.2em",
-    minWidth: "4em",
+    flex: "inline",
+    minWidth: "3em",
+    minHeight: "0.5em"
   }
 }));
 
