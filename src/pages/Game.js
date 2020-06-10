@@ -6,6 +6,7 @@ import NavBar from '../components/Navbar';
 import getWord from '../Words/words'
 import Picture from '../components/Picture'
 import PlayerBar from '../components/PlayerBar'
+import firebase from '../firebase/firebase'
 
 
 function Game() {
@@ -19,6 +20,7 @@ function Game() {
   const [loss, setLoss] = useState(false)
   const [started, setStarted] = useState(false)
   const [streak, setStreak] = useState(0)
+  const [isAdded, setIsAdded] = useState(false)
 
   useEffect(() => {
     setword(getWord())
@@ -84,6 +86,21 @@ function Game() {
     
     }
   }
+
+  function submitStreak(data) {
+    if (streak > 0 && !isAdded) {
+      firebase.db.collection('scores').add({
+        username: data.username,
+        streak,
+        created: new Date()
+      }).then(() => {
+        setIsAdded(true)
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+  }
+
   if (loadingWord) {
     return(
       <Container maxWidth="md" disableGutters>
@@ -98,7 +115,7 @@ function Game() {
         <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} win={win} loss={loss}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
         <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>
-        <PlayerBar streak={streak} win={win} loss={loss}/>
+        <PlayerBar streak={streak} submitStreak={submitStreak} isAdded={isAdded}/>
     </Container>
   )
 }
