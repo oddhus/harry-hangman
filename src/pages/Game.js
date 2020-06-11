@@ -6,6 +6,7 @@ import NavBar from '../components/Navbar';
 import getWord from '../Words/words'
 import Picture from '../components/Picture'
 import PlayerBar from '../components/PlayerBar'
+import StatusMessage from '../components/StatusMessage'
 import firebase from '../firebase/firebase'
 
 
@@ -18,14 +19,14 @@ function Game() {
   const [attempts, setAttempts] = useState(5)
   const [win, setWin] = useState(false)
   const [loss, setLoss] = useState(false)
-  const [started, setStarted] = useState(false)
+  const [addedStreak, setAddedStreak] = useState(null)
   const [streak, setStreak] = useState(0)
   const [isAdded, setIsAdded] = useState(false)
+  const [totalAttempts, setTotalAttempts] = useState(0)
 
   useEffect(() => {
     setword(getWord())
     setloadingWord(false)
-    setStarted(true)
   }, [])
 
   useEffect(() => {
@@ -38,20 +39,16 @@ function Game() {
       }
     })
     setHiddenWord(temp)
-
   }, [correctGuesses, word])
 
   useEffect(() => {
     const allLettersFound = word.every(letter => correctGuesses.includes(letter) || letter === " ")
-    if (started && attempts === 0 && !allLettersFound) {
+    if (attempts === 0 && !allLettersFound) {
       setLoss(true)
-      setStreak(0)
-    } else if (started && allLettersFound) {
+    } else if (allLettersFound && word.length !== 0) {
       setWin(true)
-      setStreak(streak + 1)
-      setStarted(false)
-    }
-  }, [correctGuesses, attempts, word, started, streak])
+    } 
+  }, [correctGuesses, attempts, word])
 
   function showAnswer() {
     setLoss(true)
@@ -61,29 +58,32 @@ function Game() {
   }
 
   function getNewWord() {
-    setword(getWord())
+    if (win){
+      setStreak(s => s + 1)
+    }
     if (loss) {
       setStreak(0)
+      setTotalAttempts(0)
+      setIsAdded(false)
     }
+    setword(getWord())
     setAttempts(5)
     setCorrectGuesses([])
     setWrongGuesses([])
     setWin(false)
     setLoss(false)
-    setStarted(true)
   }
 
   function onLetterClick(letter) {
     if (win || loss) {
       return
     }
-
     if ((word.indexOf(letter) > -1) && !(correctGuesses.indexOf(letter) > -1)) {
       setCorrectGuesses([...correctGuesses, letter])
     } else if (!(word.indexOf(letter) > -1) && !(wrongGuesses.indexOf(letter) > -1)) {
       setWrongGuesses([...wrongGuesses, letter])
       setAttempts(a => a - 1)
-    
+      setTotalAttempts(total => total + 1)
     }
   }
 
@@ -92,11 +92,14 @@ function Game() {
       firebase.db.collection('scores').add({
         username: data.username,
         streak,
-        created: new Date()
+        created: new Date(),
+        totalAttempts
       }).then(() => {
-        setIsAdded(true)
+        console.log("added")
+        getNewWord()
+        setAddedStreak("added")
       }).catch((error) => {
-        console.log(error)
+        setAddedStreak(error.message)
       })
     }
   }
@@ -115,7 +118,8 @@ function Game() {
         <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} win={win} loss={loss}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
         <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>
-        <PlayerBar streak={streak} submitStreak={submitStreak} isAdded={isAdded}/>
+        <PlayerBar streak={streak} submitStreak={submitStreak} isAdded={isAdded} loss={loss}/>
+        <StatusMessage success={addedStreak}/>
     </Container>
   )
 }

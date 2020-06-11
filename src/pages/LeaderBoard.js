@@ -15,7 +15,7 @@ export default function LeaderBoard() {
   const classes = useStyles();
 
   const [scores, loading, error] = useCollectionDataOnce(
-    firebase.db.collection('scores'),
+    firebase.db.collection('scores').orderBy('streak').limit(20),
     {
       snapshotListenOptions: { includeMetadataChanges: true }
     }

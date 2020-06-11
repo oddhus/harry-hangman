@@ -17,6 +17,12 @@ export default function PlayerBar(props) {
       setOpen(false)
     }, [props.isAdded])
 
+    useEffect(() => {
+        if(!props.isAdded && props.loss && props.streak !== 0){
+            setOpen(true)
+        }
+    }, [props.isAdded, props.loss, props.streak])
+
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -24,6 +30,11 @@ export default function PlayerBar(props) {
     const handleClose = () => {
       setOpen(false);
     };
+
+    const onClick = (data) => {
+        handleClose()
+        props.submitStreak(data)
+    }
 
     return (
         <div>
@@ -49,7 +60,7 @@ export default function PlayerBar(props) {
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleSubmit(props.submitStreak)} color="primary">
+                    <Button onClick={handleSubmit(onClick)} color="primary">
                         Add score
                     </Button>
                 </DialogActions>
