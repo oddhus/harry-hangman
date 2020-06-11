@@ -43,7 +43,7 @@ export default function CustomizedSnackbars(props) {
     const successMessage = (
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-                This is a success message!
+                Scoren ble lagt til leaderboardet
             </Alert>
         </Snackbar>
     )
@@ -51,7 +51,7 @@ export default function CustomizedSnackbars(props) {
     const errorMessage = (
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
-                This is a success message!
+                Det skjedde noe feil! {props.success}
             </Alert>
         </Snackbar>
     )

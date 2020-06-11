@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from '../firebase/firebase'
 import { useCollectionDataOnce } from 'react-firebase-hooks/firestore';
-import { Container, CircularProgress, TableContainer, Table, TableRow, TableCell, TableBody, TableHead, Paper } from '@material-ui/core';
+import { Container, CircularProgress, TableContainer, Table, TableRow, TableCell, TableBody, TableHead, Paper, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment'
 
@@ -15,15 +15,17 @@ export default function LeaderBoard() {
   const classes = useStyles();
 
   const [scores, loading, error] = useCollectionDataOnce(
-    firebase.db.collection('scores').orderBy('streak').limit(20),
+    firebase.db.collection('scores').orderBy('streak', 'desc').limit(20),
     {
       snapshotListenOptions: { includeMetadataChanges: true }
     }
   )
   if (loading) {
     return(
-      <Container maxWidth="sm" disableGutters>
-        <CircularProgress/>
+      <Container maxWidth="sm" disableGutters pt={[2,3,4]}>
+        <Grid container justify="center">
+          <CircularProgress/>
+        </Grid>
       </Container>
     )
   }
@@ -42,7 +44,7 @@ export default function LeaderBoard() {
         </TableHead>
         <TableBody>
           {scores.map((score) => (
-            <TableRow key={score.username}>
+            <TableRow key={`${score.username}${score.created.seconds}`}>
               <TableCell component="th" scope="row">
                 {score.username}
               </TableCell>

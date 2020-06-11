@@ -50,6 +50,13 @@ function Game() {
     } 
   }, [correctGuesses, attempts, word])
 
+  useEffect(() => {
+    if(loss){
+      showAnswer()
+      console.log("test")
+    }
+  }, [loss])
+
   function showAnswer() {
     setLoss(true)
     let temp = []
@@ -93,9 +100,8 @@ function Game() {
         username: data.username,
         streak,
         created: new Date(),
-        totalAttempts
+        totalAttempts,
       }).then(() => {
-        console.log("added")
         getNewWord()
         setAddedStreak("added")
       }).catch((error) => {
@@ -117,8 +123,7 @@ function Game() {
         <Picture attempts={attempts}/>
         <WordBar hiddenWord={hiddenWord} attempts={attempts} streak={streak} win={win} loss={loss}/>
         <Keyboard onLetterClick={onLetterClick} win={win} loss={loss}/>
-        <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss}/>
-        <PlayerBar streak={streak} submitStreak={submitStreak} isAdded={isAdded} loss={loss}/>
+        <NavBar showAnswer={showAnswer} newWord={getNewWord} win={win} loss={loss} streak={streak} submitStreak={submitStreak} isAdded={isAdded}/>
         <StatusMessage success={addedStreak}/>
     </Container>
   )
