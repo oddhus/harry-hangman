@@ -30,15 +30,21 @@ function NavBar(props) {
 
     return (
       <Box pt={[1.5,2,3]}>
-        <Grid container direction="row" justify="space-between" spacing={3}>
+        <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
           <Grid item xs>
-            <Button variant="contained" onClick={props.newWord} color={nyttOrd} disabled={nyttDisabled}>Nytt ord</Button>
+            <Box display="flex" justifyContent="center">
+              <Button variant="contained" onClick={props.newWord} color={nyttOrd} disabled={nyttDisabled}>Nytt ord</Button>
+            </Box>
           </Grid>
-          <Grid item xs alignItems="center">
-            <Button variant="contained" onClick={props.showAnswer} color={visSvaret} disabled={visDisabled}>Vis svaret</Button>
+          <Grid item xs>
+            <Box display="flex" justifyContent="center">
+              <Button variant="contained" onClick={props.showAnswer} color={visSvaret} disabled={visDisabled}>Vis svaret</Button>
+            </Box>
           </Grid>
-          <Grid item xs alignItems="center">
-            <PlayerBar streak={props.streak} submitStreak={props.submitStreak} isAdded={props.isAdded} loss={props.loss}/>
+          <Grid item xs>
+            <Box display="flex" justifyContent="center">
+              <PlayerBar streak={props.streak} submitStreak={props.submitStreak} isAdded={props.isAdded} loss={props.loss}/>
+            </Box>  
           </Grid>
         </Grid>
       </Box>

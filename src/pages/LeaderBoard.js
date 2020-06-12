@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 export default function LeaderBoard() {
   const classes = useStyles();
 
-  const [scores, loading, error] = useCollectionDataOnce(
+  const [scores, loading] = useCollectionDataOnce(
     firebase.db.collection('scores').orderBy('streak', 'desc').limit(20),
     {
       snapshotListenOptions: { includeMetadataChanges: true }

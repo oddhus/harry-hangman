@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Paper, Typography, Box, Container,Card, CardMedia } from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
 import statusImg1 from '../assets/1.svg'
 import statusImg2 from '../assets/2.svg'

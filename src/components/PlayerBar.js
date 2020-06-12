@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Box } from '@material-ui/core';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 
 export default function PlayerBar(props) {
     const [open, setOpen] = useState(false);
     const [streak, setStreak] = useState(props.streak)
-    const { register, handleSubmit, errors } = useForm(); // initialise the hook
+    const { register, handleSubmit } = useForm(); // initialise the hook
     const [disableButton, setDisableButton] = useState(true)
 
     useEffect(() => {

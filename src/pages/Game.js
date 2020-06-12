@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Container, CircularProgress } from '@material-ui/core'
 import WordBar from '../components/WordBar';
 import Keyboard from '../components/KeyBoard';
 import NavBar from '../components/Navbar';
 import getWord from '../Words/words'
 import Picture from '../components/Picture'
-import PlayerBar from '../components/PlayerBar'
 import StatusMessage from '../components/StatusMessage'
 import firebase from '../firebase/firebase'
 
@@ -24,48 +23,15 @@ function Game() {
   const [isAdded, setIsAdded] = useState(false)
   const [totalAttempts, setTotalAttempts] = useState(0)
 
-  useEffect(() => {
-    setword(getWord())
-    setloadingWord(false)
-  }, [])
-
-  useEffect(() => {
-    let temp = []
-    word.forEach((letter) => {
-      if (correctGuesses.indexOf(letter) > -1 || letter === " ") {
-        temp.push(letter)
-      } else {
-        temp.push('*')
-      }
-    })
-    setHiddenWord(temp)
-  }, [correctGuesses, word])
-
-  useEffect(() => {
-    const allLettersFound = word.every(letter => correctGuesses.includes(letter) || letter === " ")
-    if (attempts === 0 && !allLettersFound) {
-      setLoss(true)
-    } else if (allLettersFound && word.length !== 0) {
-      setWin(true)
-    } 
-  }, [correctGuesses, attempts, word])
-
-  useEffect(() => {
-    if(loss){
-      showAnswer()
-      console.log("test")
-    }
-  }, [loss])
-
-  function showAnswer() {
+  const showAnswer = useCallback(() => {
     setLoss(true)
     let temp = []
     word.forEach(letter => temp.push(letter))
     setHiddenWord(temp)
-  }
+  }, [setLoss, word, setHiddenWord])
 
   function getNewWord() {
-    if (win){
+    if (win) {
       setStreak(s => s + 1)
     }
     if (loss) {
@@ -109,6 +75,38 @@ function Game() {
       })
     }
   }
+
+  useEffect(() => {
+    setword(getWord())
+    setloadingWord(false)
+  }, [])
+
+  useEffect(() => {
+    let temp = []
+    word.forEach((letter) => {
+      if (correctGuesses.indexOf(letter) > -1 || letter === " ") {
+        temp.push(letter)
+      } else {
+        temp.push('*')
+      }
+    })
+    setHiddenWord(temp)
+  }, [correctGuesses, word])
+
+  useEffect(() => {
+    const allLettersFound = word.every(letter => correctGuesses.includes(letter) || letter === " ")
+    if (attempts === 0 && !allLettersFound) {
+      setLoss(true)
+    } else if (allLettersFound && word.length !== 0) {
+      setWin(true)
+    } 
+  }, [correctGuesses, attempts, word])
+
+  useEffect(() => {
+    if(loss){
+      showAnswer()
+    }
+  }, [loss, showAnswer])
 
   if (loadingWord) {
     return(

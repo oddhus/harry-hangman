@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Game from './pages/Game';
 import LeaderBoard from './pages/LeaderBoard';
+import About from './pages/About';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Game}/>
           <Route exact path="/leaderboard" component={LeaderBoard}/>
-          <Route exact path="/about" component={() => <div>customsoftware</div>}/>
+          <Route exact path="/about" component={About}/>
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
