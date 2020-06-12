@@ -1,11 +1,7 @@
-import { observable, computed, action, decorate } from "mobx"
+import { observable, action, decorate, computed } from "mobx"
 
-export class Streak {
+export class streakStore {
     streak = 0
-
-    get streak() {
-        return streak
-    }
 
     incrementStreak() {
         this.streak++
@@ -15,7 +11,8 @@ export class Streak {
         this.streak = 0
     }
 }
-decorate(Timer, {
+
+decorate(streakStore, {
     streak: observable,
     incrementStreak: action,
     reset: action
