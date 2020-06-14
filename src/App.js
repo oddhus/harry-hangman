@@ -6,18 +6,21 @@ import Header from './components/Header';
 import Game from './pages/Game';
 import LeaderBoard from './pages/LeaderBoard';
 import About from './pages/About';
+import { StoreProvider } from './store/store';
 
 function App() {
   return (
     <ThemeProvider theme={Theme}>
-      <BrowserRouter>
-        <Header/>
-        <Switch>
-          <Route exact path="/" component={Game}/>
-          <Route exact path="/leaderboard" component={LeaderBoard}/>
-          <Route exact path="/about" component={About}/>
-        </Switch>
-      </BrowserRouter>
+      <StoreProvider>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Game} />
+            <Route exact path="/leaderboard" component={LeaderBoard} />
+            <Route exact path="/about" component={About} />
+          </Switch>
+        </BrowserRouter>
+      </StoreProvider>
     </ThemeProvider>
   )
 }

@@ -7,9 +7,11 @@ import getWord from '../Words/words'
 import Picture from '../components/Picture'
 import StatusMessage from '../components/StatusMessage'
 import firebase from '../firebase/firebase'
+import { useStore } from '../store/store';
 
 
 function Game() {
+  const store = useStore()
   const [loadingWord, setloadingWord] = useState(true)
   const [word, setword] = useState([])
   const [wrongGuesses, setWrongGuesses] = useState([])
@@ -32,10 +34,12 @@ function Game() {
 
   function getNewWord() {
     if (win) {
-      setStreak(s => s + 1)
+      store.incrementStreak()
+      // setStreak(s => s + 1)
     }
     if (loss) {
-      setStreak(0)
+      store.resetStreak()
+      //setStreak(0)
       setTotalAttempts(0)
       setIsAdded(false)
     }
@@ -61,13 +65,14 @@ function Game() {
   }
 
   function submitStreak(data) {
-    if (streak > 0 && !isAdded) {
+    if (store.streak > 0 && !isAdded) {
       firebase.db.collection('scores').add({
         username: data.username,
-        streak,
+        streak: store.streak,
         created: new Date(),
         totalAttempts,
       }).then(() => {
+        console.log("added")
         getNewWord()
         setAddedStreak("added")
       }).catch((error) => {

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { useStore } from '../store/store';
 
 export default function PlayerBar(props) {
+    const store = useStore()
     const [open, setOpen] = useState(false);
     const [streak, setStreak] = useState(props.streak)
     const { register, handleSubmit } = useForm(); // initialise the hook
     const [disableButton, setDisableButton] = useState(true)
 
     useEffect(() => {
-        setStreak(props.streak)
-        setDisableButton(props.streak === 0)
-    }, [props.streak])
+        setDisableButton(store.streak === 0)
+    }, [store.streak])
 
     useEffect(() => {
       setOpen(false)
@@ -45,7 +46,7 @@ export default function PlayerBar(props) {
                 <DialogTitle id="form-dialog-title">Lagre Streak</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Du har en streak på {streak}. Kanskje du havner du på leaderborden :).<br></br>
+                        Du har en streak på {store.streak}. Kanskje du havner du på leaderborden :).<br></br>
                         Advarsel! Dette vil resette streaken til 0.
                     </DialogContentText>
                     <TextField
