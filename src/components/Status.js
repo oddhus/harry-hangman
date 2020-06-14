@@ -22,33 +22,33 @@ export default function Status(props) {
   const [streakColor, setStreakColor] = useState("#fffde7")
 
   useEffect(() => {
-    if (store.win){
+    if (store.game.win){
       setColor("#c6ff00")
-    } else if (store.loss) {
+    } else if (store.game.loss) {
       setColor("#ff1744")
     } else {
-      setColor(attemptColors[store.attempts])
+      setColor(attemptColors[store.game.attempts])
     }
-  }, [store.attempts, store.win, store.loss])
+  }, [store.game.attempts, store.game.win, store.game.loss])
 
   useEffect(() => {
-    if (store.streak < streakColors.streak) {
-      setStreakColor(streakColors[store.streak])
+    if (store.game.streak < streakColors.streak) {
+      setStreakColor(streakColors[store.game.streak])
     }
-  }, [store.streak])
+  }, [store.game.streak])
 
   return useObserver(() => (
       <Grid item xs={12}>
         <Paper className={classes.paper} elevation={0}>
             <Grid container spacing={2}>
               <InfoTile color={streakColor} size={6}>
-                <Typography variant="h5">Streak: {store.streak}</Typography>
+                <Typography variant="h5">Streak: {store.game.streak}</Typography>
               </InfoTile>
               <InfoTile color={color} size={6}>
                 <Typography variant="h5">
-                  {store.win ? "Magisk!" :
-                    store.loss ? "Trollsnørr!" :
-                      `${store.attempts} forsøk igjen`}</Typography>
+                  {store.game.win ? "Magisk!" :
+                    store.game.loss ? "Trollsnørr!" :
+                      `${store.game.attempts} forsøk igjen`}</Typography>
               </InfoTile>
             </Grid>
           </Paper>           

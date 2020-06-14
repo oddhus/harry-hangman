@@ -10,8 +10,8 @@ export default function PlayerBar(props) {
     const [disableButton, setDisableButton] = useState(true)
 
     useEffect(() => {
-        setDisableButton(store.streak === 0)
-    }, [store.streak])
+        setDisableButton(store.game.streak === 0)
+    }, [store.game.streak])
 
     useEffect(() => {
       setOpen(false)
@@ -45,7 +45,7 @@ export default function PlayerBar(props) {
                 <DialogTitle id="form-dialog-title">Lagre Streak</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Du har en streak på {store.streak}. Kanskje du havner du på leaderborden :).<br></br>
+                        Du har en streak på {store.game.streak}. Kanskje du havner du på leaderborden :).<br></br>
                         Advarsel! Dette vil resette streaken til 0.
                     </DialogContentText>
                     <TextField

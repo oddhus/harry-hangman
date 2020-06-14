@@ -46,7 +46,7 @@ function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
       <Paper className={classes.paper}>
         <Status attempts={attempts} streak={streak} color={color} win={win} loss={loss} streakColor={streakColor}/>
         <Grid container justify="center">
-          {store.hiddenWord.map((letter, i) => (
+          {store.game.hiddenWord.map((letter, i) => (
             letter === ' ' ?
               <Paper key={`${letter}${i}`} className={classes.paperLetterEmpty} elevation={0} /> :
               <Grid key={`${letter}${i}`} className={classes.letterContainer}>

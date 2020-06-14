@@ -36,12 +36,12 @@ function NavBar(props) {
         <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
           <Grid item xs>
             <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={store.startNewRound} color={nyttOrd} disabled={!(store.loss || store.win)}>Nytt ord</Button>
+              <Button variant="contained" onClick={store.game.startNewRound} color={nyttOrd} disabled={!(store.game.loss || store.game.win)}>Nytt ord</Button>
             </Box>
           </Grid>
           <Grid item xs>
             <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={store.showAnswer} color={visSvaret} disabled={(store.loss || store.win)}>Vis svaret</Button>
+              <Button variant="contained" onClick={store.game.showAnswer} color={visSvaret} disabled={(store.game.loss || store.game.win)}>Vis svaret</Button>
             </Box>
           </Grid>
           <Grid item xs>

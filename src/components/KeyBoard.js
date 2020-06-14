@@ -45,8 +45,8 @@ export default function Keyboard(props) {
               <Button
                 className={classes.button}
                 variant="outlined"
-                onClick={() => store.addLetter(letter)}
-                disabled={(store.correctGuesses.includes(letter) || store.wrongGuesses.includes(letter))}
+                onClick={() => store.game.addLetter(letter)}
+                disabled={(store.game.correctGuesses.includes(letter) || store.game.wrongGuesses.includes(letter))}
               >
                 <Typography variant="h6">{letter}</Typography>
               </Button>
