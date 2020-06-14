@@ -3,6 +3,7 @@ import { Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
 import InfoTile from './InfoTile';
 import { useStore } from '../store/store';
+import { useObserver } from 'mobx-react';
 
 const useStyles = makeStyles(theme => ({
   paper:{
@@ -17,43 +18,26 @@ const attemptColors = ["#ef5350","#ef5350","#ffca28","#d4e157","#d4e157","#9ccc6
 export default function Status(props) {
   const store = useStore()
   const classes = useStyles();
-  const [statusText, setStatusText] = useState("")
-  const [streak, setStreak] = useState()
   const [color, setColor] = useState("#9ccc65")
   const [streakColor, setStreakColor] = useState("#fffde7")
 
   useEffect(() => {
-    setStreak(props.streak)
-  }, [props.streak])
-
-  useEffect(() => {
-    let text = <Typography variant="h5">{props.attempts} forsøk igjen</Typography>
-    if (props.win){
-      text = <Typography variant="h5">Magisk!</Typography>
-    } else if (props.loss){
-      text = <Typography variant="h5">Trollsnørr! </Typography>
-    }
-    setStatusText(text)
-  }, [props.win, props.loss, props.attempts])
-
-  useEffect(() => {
-    if (props.win){
+    if (store.win){
       setColor("#c6ff00")
-    } else if (props.loss) {
+    } else if (store.loss) {
       setColor("#ff1744")
     } else {
-      setColor(attemptColors[props.attempts])
+      setColor(attemptColors[store.attempts])
     }
-  }, [props.attempts, props.win, props.loss])
+  }, [store.attempts, store.win, store.loss])
 
   useEffect(() => {
-    if (props.streak < streakColors.length) {
-      setStreakColor(streakColors[props.streak])
+    if (store.streak < streakColors.streak) {
+      setStreakColor(streakColors[store.streak])
     }
-  }, [props.streak])
+  }, [store.streak])
 
-
-  return (
+  return useObserver(() => (
       <Grid item xs={12}>
         <Paper className={classes.paper} elevation={0}>
             <Grid container spacing={2}>
@@ -61,10 +45,13 @@ export default function Status(props) {
                 <Typography variant="h5">Streak: {store.streak}</Typography>
               </InfoTile>
               <InfoTile color={color} size={6}>
-                {statusText}
+                <Typography variant="h5">
+                  {store.win ? "Magisk!" :
+                    store.loss ? "Trollsnørr!" :
+                      `${store.attempts} forsøk igjen`}</Typography>
               </InfoTile>
             </Grid>
           </Paper>           
       </Grid>
-  )
+  ))
 }

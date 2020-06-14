@@ -11,14 +11,14 @@ export const StoreProvider = ({ children }) => {
     win: false,
     loss: false,
     attempts: 5,
-    word: [],
-    hiddenWord: [],
+    word: ['h','e','i'],
+    hiddenWord: ['h','e','i'],
     correctGuesses: [],
     wrongGuesses: [],
-    setNewWord: word => {
-      const letterList = word.split('')
-      store.word = letterList
-      store.hiddenWord = letterList.map(letter => '*')
+    setNewWord: () => {
+      const word = getWord()
+      store.word = word
+      store.hiddenWord = word.map(letter => letter !== ' ' ? '*' : ' ')
     },
     startNewRound: () => {
       store.setNewWord()
@@ -35,12 +35,14 @@ export const StoreProvider = ({ children }) => {
       store.loss = false
     },
     addLetter: letter => {
-      if(store.word.indexOf(letter > -1) && !(store.correctGuesses.indexOf(letter) > -1)){
+      if(store.word.indexOf(letter) > -1 && !(store.correctGuesses.indexOf(letter) > -1)){
         store.correctGuesses.push(letter)
+        store.updateHiddenWord()
       } else if (!(store.word.indexOf(letter) > -1) && !(store.wrongGuesses.indexOf(letter) > -1)){
         store.wrongGuesses.push(letter)
         store.attempts--
       }
+      store.checkWin()
     },
     checkWin: () => {
       const allLettersFound = store.word.every(letter => store.correctGuesses.includes(letter) || letter === " ")

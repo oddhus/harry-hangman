@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Grid, Button, Box } from '@material-ui/core'
 import PlayerBar from './PlayerBar'
+import { useStore } from '../store/store'
+import { useObserver } from 'mobx-react'
 
 function NavBar(props) {
 
+  const store = useStore()
     const [nyttOrd, setNyttOrd] = useState()
     const [visSvaret, setVisSvaret] = useState()
     const [visDisabled, setVisDisabled] = useState(false)
@@ -28,17 +31,17 @@ function NavBar(props) {
         
     }, [props.win, props.loss])
 
-    return (
+    return useObserver(() => (
       <Box pt={[1.5,2,3]}>
         <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
           <Grid item xs>
             <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={props.newWord} color={nyttOrd} disabled={nyttDisabled}>Nytt ord</Button>
+              <Button variant="contained" onClick={store.startNewRound} color={nyttOrd} disabled={!(store.loss || store.win)}>Nytt ord</Button>
             </Box>
           </Grid>
           <Grid item xs>
             <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={props.showAnswer} color={visSvaret} disabled={visDisabled}>Vis svaret</Button>
+              <Button variant="contained" onClick={store.showAnswer} color={visSvaret} disabled={(store.loss || store.win)}>Vis svaret</Button>
             </Box>
           </Grid>
           <Grid item xs>
@@ -48,7 +51,7 @@ function NavBar(props) {
           </Grid>
         </Grid>
       </Box>
-    )
+    ))
 }
 
 export default NavBar

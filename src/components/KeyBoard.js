@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { Grid, Typography, Button, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
+import { useStore } from '../store/store';
+import { useObserver } from 'mobx-react';
 
 const useStyles = makeStyles(theme => ({
   button:{
@@ -15,6 +17,7 @@ letters.push('Æ', 'Ø', 'Å')
 
 export default function Keyboard(props) {
   const classes = useStyles();
+  const store = useStore()
 
   const [clicked, setClicked] = useState([])
 
@@ -31,7 +34,9 @@ export default function Keyboard(props) {
     }
   }
 
-  return (
+  console.log(store.correctGuesses)
+
+  return useObserver(() => (
     <Box pt={[1, 2.5, 3]}>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={0}>
@@ -40,8 +45,8 @@ export default function Keyboard(props) {
               <Button
                 className={classes.button}
                 variant="outlined"
-                onClick={() => onClick(letter)}
-                disabled={clicked.includes(letter) ? true : false}
+                onClick={() => store.addLetter(letter)}
+                disabled={(store.correctGuesses.includes(letter) || store.wrongGuesses.includes(letter))}
               >
                 <Typography variant="h6">{letter}</Typography>
               </Button>
@@ -50,5 +55,5 @@ export default function Keyboard(props) {
         </Grid>
       </Grid>
     </Box>
-  )
+  ))
 }

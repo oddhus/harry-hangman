@@ -6,7 +6,6 @@ import { useStore } from '../store/store';
 export default function PlayerBar(props) {
     const store = useStore()
     const [open, setOpen] = useState(false);
-    const [streak, setStreak] = useState(props.streak)
     const { register, handleSubmit } = useForm(); // initialise the hook
     const [disableButton, setDisableButton] = useState(true)
 
