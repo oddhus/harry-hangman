@@ -14,6 +14,9 @@ export function gameStore() {
     wrongGuesses: [],
     isAdded: false,
     errorMessage: null,
+    setIsAdded(value) {
+      this.isAdded = value
+    },
     setNewWord(){
       const word = getWord()
       this.word = word
@@ -32,6 +35,8 @@ export function gameStore() {
       this.wrongGuesses = []
       this.win = false
       this.loss = false
+      this.isAdded = false
+      this.errorMessage = null
     },
     addLetter(letter){
       if(this.word.indexOf(letter) > -1 && !(this.correctGuesses.indexOf(letter) > -1)){

@@ -18,7 +18,7 @@ function Game() {
       if (game.loss) {
         game.showAnswer()
       }
-    })
+    }), []
   )
 
   useEffect(() => {

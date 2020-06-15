@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useStore } from '../store/store';
 import { autorun } from 'mobx';
+import { useObserver } from 'mobx-react-lite';
 
 export default function PlayerBar(props) {
     const { game } = useStore()
@@ -40,7 +41,7 @@ export default function PlayerBar(props) {
         props.submitStreak(data)
     }
 
-    return (
+    return useObserver(() => (
         <React.Fragment>
             <Button variant="contained" color="secondary" onClick={handleClickOpen} disabled={game.streak === 0 && !game.isAdded}>
                 Lagre Streak
@@ -70,6 +71,6 @@ export default function PlayerBar(props) {
                 </DialogActions>
             </Dialog>
         </React.Fragment>
-    )
+    ))
 }
 

@@ -16,8 +16,8 @@ function NavBar() {
         created: new Date(),
         totalAttempts: game.totalAttempts,
       }).then(() => {
-        game.startNewRound()
         game.isAdded = true
+        game.startNewRound()
       }).catch((error) => {
         game.isAdded = false
         game.errorMessage = error.message
