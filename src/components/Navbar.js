@@ -3,47 +3,49 @@ import { Grid, Button, Box } from '@material-ui/core'
 import PlayerBar from './PlayerBar'
 import { useStore } from '../store/store'
 import { useObserver } from 'mobx-react-lite'
+import firebase from '../firebase/firebase'
 
-function NavBar(props) {
+function NavBar() {
+  const { game, ui } = useStore()
 
-  const {game} = useStore()
-    const store = useStore()
-    const [nyttOrd, setNyttOrd] = useState()
-    const [visSvaret, setVisSvaret] = useState()
+  function submitStreak(data) {
+    if (game.streak > 0 && !game.isAdded) {
+      firebase.db.collection('scores').add({
+        username: data.username,
+        streak: game.streak,
+        created: new Date(),
+        totalAttempts: game.totalAttempts,
+      }).then(() => {
+        game.startNewRound()
+        game.isAdded = true
+      }).catch((error) => {
+        game.isAdded = false
+        game.errorMessage = error.message
+      })
+    }
+  }
 
-    useEffect(() => {
-        if (game.win){
-            setNyttOrd("primary")
-        } else if (game.loss) {
-            setNyttOrd("primary")
-            setVisSvaret("primary")
-        } else if (!game.win && !game.loss){
-            setNyttOrd("default")
-            setVisSvaret("default")
-        }  
-    }, [game.win, game.loss])
-
-    return useObserver(() => (
-      <Box pt={[1.5,2,3]}>
-        <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
-          <Grid item xs>
-            <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={store.game.startNewRound} color={nyttOrd} disabled={!(store.game.loss || store.game.win)}>Nytt ord</Button>
-            </Box>
-          </Grid>
-          <Grid item xs>
-            <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={store.game.showAnswer} color={visSvaret} disabled={(store.game.loss || store.game.win)}>Vis svaret</Button>
-            </Box>
-          </Grid>
-          <Grid item xs>
-            <Box display="flex" justifyContent="center">
-              <PlayerBar submitStreak={props.submitStreak}/>
-            </Box>  
-          </Grid>
+  return useObserver(() => (
+    <Box pt={[1.5, 2, 3]}>
+      <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
+        <Grid item xs>
+          <Box display="flex" justifyContent="center">
+            <Button variant="contained" onClick={game.startNewRound} color={ui.nyttOrdButton(game.loss, game.win)} disabled={!(game.loss || game.win)}>Nytt ord</Button>
+          </Box>
         </Grid>
-      </Box>
-    ))
+        <Grid item xs>
+          <Box display="flex" justifyContent="center">
+            <Button variant="contained" onClick={game.showAnswer} color="default" disabled={(game.loss || game.win)}>Vis svaret</Button>
+          </Box>
+        </Grid>
+        <Grid item xs>
+          <Box display="flex" justifyContent="center">
+            <PlayerBar submitStreak={submitStreak} />
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  ))
 }
 
 export default NavBar

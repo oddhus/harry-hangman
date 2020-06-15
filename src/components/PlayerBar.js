@@ -15,7 +15,7 @@ export default function PlayerBar(props) {
                 setOpen(false)
             }
         }),
-        [game.isAdded] // note empty dependencies
+      [] // note empty dependencies
     )
 
     useEffect(() =>
@@ -24,7 +24,7 @@ export default function PlayerBar(props) {
                 setOpen(true)
             }
         }),
-        [game.isAdded, game.loss, game.streak], // note empty dependencies
+      [], // note empty dependencies
     )
 
     const handleClickOpen = () => {

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import { useStore } from '../store/store';
+import { observer, useObserver } from 'mobx-react-lite';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedSnackbars(props) {
     const classes = useStyles();
+    const { game } = useStore()
     const [open, setOpen] = useState(false)
     const [success, setSuccess] = useState(null)
 
@@ -41,7 +44,7 @@ export default function CustomizedSnackbars(props) {
     };
 
     const successMessage = (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={game.isAdded} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
                 Scoren ble lagt til leaderboardet
             </Alert>
@@ -49,16 +52,16 @@ export default function CustomizedSnackbars(props) {
     )
 
     const errorMessage = (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={game.errorMessage} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
-                Det skjedde noe feil! {props.success}
+                Det skjedde noe feil! {game.errorMessage}
             </Alert>
         </Snackbar>
     )
 
-    return (
+    return useObserver(() => (
         <div className={classes.root}>
-            {success ? successMessage : errorMessage}
+            {game.isAdded ? successMessage : errorMessage}
         </div>
-    )
+    ))
 }
