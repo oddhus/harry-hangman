@@ -23,13 +23,10 @@ export function gameStore() {
       this.hiddenWord = word.map(letter => letter !== ' ' ? '*' : ' ')
     },
     startNewRound(){
-      this.setNewWord()
-      if (this.win) {
-        this.streak++
-      }
-      if (this.loss){
+      if (this.loss || this.isAdded){
         this.streak = 0
       }
+      this.setNewWord()
       this.attempts = 5
       this.correctGuesses = []
       this.wrongGuesses = []
@@ -54,6 +51,7 @@ export function gameStore() {
         this.loss = true
       } else if (allLettersFound && this.word.length !== 0) {
         this.win = true
+        this.streak++
       } 
     },
     updateHiddenWord(){

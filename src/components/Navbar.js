@@ -30,7 +30,7 @@ function NavBar() {
       <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
         <Grid item xs>
           <Box display="flex" justifyContent="center">
-            <Button variant="contained" onClick={game.startNewRound} color={ui.nyttOrdButton(game.loss, game.win)} disabled={!(game.loss || game.win)}>Nytt ord</Button>
+            <Button variant="contained" onClick={() => {game.startNewRound(); game.isAdded = false}} color={ui.nyttOrdButton(game.loss, game.win)} disabled={!(game.loss || game.win)}>Nytt ord</Button>
           </Box>
         </Grid>
         <Grid item xs>
