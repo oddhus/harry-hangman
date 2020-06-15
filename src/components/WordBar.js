@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { Grid, Paper, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
 import Status from './Status';
@@ -33,12 +33,6 @@ const useStyles = makeStyles(theme => ({
 function Word({hiddenWord, attempts, streak, color, streakColor, win, loss}) {
   const classes = useStyles();
   const store = useStore()
-
-  // const [letterArray, setLetterArray] = useState([])
-
-  // useEffect(() => {
-  //   setLetterArray(hiddenWord) 
-  // }, [hiddenWord]);
 
   return useObserver(() => (
     <Box pt={[1, 1.5, 2]}>

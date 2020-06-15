@@ -2,7 +2,6 @@ import React from 'react'
 import { gameStore } from './gameStore'
 import { uiStore } from './uiStore'
 import { useLocalStore } from 'mobx-react'
-import getWord from '../Words/words'
 
 const storeContext = React.createContext({
   game: undefined,

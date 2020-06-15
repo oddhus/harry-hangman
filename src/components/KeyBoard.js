@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { Grid, Typography, Button, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
 import { useStore } from '../store/store';
@@ -15,26 +15,9 @@ const useStyles = makeStyles(theme => ({
 const letters = Array(26).fill(65).map((x,y) => String.fromCharCode(x+y))
 letters.push('Æ', 'Ø', 'Å')
 
-export default function Keyboard(props) {
+export default function Keyboard() {
   const classes = useStyles();
   const store = useStore()
-
-  const [clicked, setClicked] = useState([])
-
-  useEffect(() => {
-    if(!props.win && !props.loss){
-      setClicked([])
-    }
-  }, [props.win, props.loss])
-
-  function onClick(letter) {
-    if(!props.win && !props.loss){
-      props.onLetterClick(letter)
-      setClicked(clicked => [...clicked, letter])
-    }
-  }
-
-  console.log(store.correctGuesses)
 
   return useObserver(() => (
     <Box pt={[1, 2.5, 3]}>

@@ -7,10 +7,13 @@ export function gameStore() {
     win: false,
     loss: false,
     attempts: 5,
+    totalAttempts: 0,
     word: ['h','e','i'],
     hiddenWord: ['h','e','i'],
     correctGuesses: [],
     wrongGuesses: [],
+    isAdded: false,
+    errorMessage: null,
     setNewWord(){
       const word = getWord()
       this.word = word
@@ -62,9 +65,7 @@ export function gameStore() {
     showAnswer(){
       this.loss = true
       this.hiddenWord = this.word
-    },
-    incrementStreak: () => this.streak++,
-    resetStreak: () => this.streak = 0
+    }
   }
 }
 

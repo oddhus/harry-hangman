@@ -6,30 +6,22 @@ import { useObserver } from 'mobx-react'
 
 function NavBar(props) {
 
-  const store = useStore()
+  const {game} = useStore()
+    const store = useStore()
     const [nyttOrd, setNyttOrd] = useState()
     const [visSvaret, setVisSvaret] = useState()
-    const [visDisabled, setVisDisabled] = useState(false)
-    const [nyttDisabled, setNyttDisabled] = useState(false)
 
     useEffect(() => {
-        if (props.win){
+        if (game.win){
             setNyttOrd("primary")
-            setVisDisabled(true)
-            setNyttDisabled(false)
-        } else if (props.loss) {
+        } else if (game.loss) {
             setNyttOrd("primary")
             setVisSvaret("primary")
-            setVisDisabled(true)
-            setNyttDisabled(false)
-        } else if (!props.win && !props.loss){
+        } else if (!game.win && !game.loss){
             setNyttOrd("default")
             setVisSvaret("default")
-            setVisDisabled(false)
-            setNyttDisabled(true)
-        }
-        
-    }, [props.win, props.loss])
+        }  
+    }, [game.win, game.loss])
 
     return useObserver(() => (
       <Box pt={[1.5,2,3]}>
@@ -46,7 +38,7 @@ function NavBar(props) {
           </Grid>
           <Grid item xs>
             <Box display="flex" justifyContent="center">
-              <PlayerBar streak={props.streak} submitStreak={props.submitStreak} isAdded={props.isAdded} loss={props.loss}/>
+              <PlayerBar submitStreak={props.submitStreak}/>
             </Box>  
           </Grid>
         </Grid>

@@ -2,33 +2,37 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useStore } from '../store/store';
+import { autorun } from 'mobx';
 
 export default function PlayerBar(props) {
-    const store = useStore()
+    const { game } = useStore()
     const [open, setOpen] = useState(false);
     const { register, handleSubmit } = useForm(); // initialise the hook
-    const [disableButton, setDisableButton] = useState(true)
 
-    useEffect(() => {
-        setDisableButton(store.game.streak === 0)
-    }, [store.game.streak])
+    useEffect(() =>
+        autorun(() => {
+            if (game.isAdded) {
+                setOpen(false)
+            }
+        }),
+        [game.isAdded], // note empty dependencies
+    )
 
-    useEffect(() => {
-      setOpen(false)
-    }, [props.isAdded])
-
-    useEffect(() => {
-        if(!props.isAdded && props.loss && props.streak !== 0){
-            setOpen(true)
-        }
-    }, [props.isAdded, props.loss, props.streak])
+    useEffect(() =>
+        autorun(() => {
+            if (!game.isAdded && game.loss && game.streak !== 0) {
+                setOpen(true)
+            }
+        }),
+        [game.isAdded, game.loss, game.streak], // note empty dependencies
+    )
 
     const handleClickOpen = () => {
-      setOpen(true);
+        setOpen(true);
     };
-  
+
     const handleClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
 
     const onClick = (data) => {
@@ -38,14 +42,14 @@ export default function PlayerBar(props) {
 
     return (
         <React.Fragment>
-            <Button variant="contained" color="secondary" onClick={handleClickOpen} disabled={disableButton}>
+            <Button variant="contained" color="secondary" onClick={handleClickOpen} disabled={game.streak === 0 && !game.isAdded}>
                 Lagre Streak
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Lagre Streak</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Du har en streak på {store.game.streak}. Kanskje du havner du på leaderborden :).<br></br>
+                        Du har en streak på {game.streak}. Kanskje du havner du på leaderborden :).<br></br>
                         Advarsel! Dette vil resette streaken til 0.
                     </DialogContentText>
                     <TextField
@@ -65,7 +69,7 @@ export default function PlayerBar(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </React.Fragment>    
+        </React.Fragment>
     )
 }
 
