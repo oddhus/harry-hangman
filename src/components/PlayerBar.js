@@ -15,7 +15,7 @@ export default function PlayerBar(props) {
                 setOpen(false)
             }
         }),
-        [game.isAdded], // note empty dependencies
+        [game.isAdded] // note empty dependencies
     )
 
     useEffect(() =>

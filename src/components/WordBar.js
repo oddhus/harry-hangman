@@ -3,7 +3,7 @@ import { Grid, Paper, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles/'
 import Status from './Status';
 import { useStore } from '../store/store';
-import { useObserver } from 'mobx-react';
+import { useObserver } from 'mobx-react-lite';
 
 const useStyles = makeStyles(theme => ({
   letterContainer: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { gameStore } from './gameStore'
 import { uiStore } from './uiStore'
-import { useLocalStore } from 'mobx-react'
+import { useLocalStore } from 'mobx-react-lite'
 
 const storeContext = React.createContext({
   game: undefined,

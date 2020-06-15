@@ -31,11 +31,13 @@ function Game() {
     }
   }
 
-  autorun(() => {
-    if(game.loss){
-      game.showAnswer()
-    }
-  })
+  useEffect(() =>
+    autorun(() => {
+      if (game.loss) {
+        game.showAnswer()
+      }
+    }), [game.loss]
+  )
 
   useEffect(() => {
     game.startNewRound()
