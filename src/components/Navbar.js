@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { Grid, Button, Box } from '@material-ui/core'
 import PlayerBar from './PlayerBar'
 import { useStore } from '../store/store'
