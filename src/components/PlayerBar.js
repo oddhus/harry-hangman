@@ -8,7 +8,7 @@ import { useObserver } from 'mobx-react-lite';
 export default function PlayerBar(props) {
     const { game } = useStore()
     const [open, setOpen] = useState(false);
-    const { register, handleSubmit } = useForm(); // initialise the hook
+    const { register, handleSubmit, errors } = useForm(); // initialise the hook
 
     useEffect(() =>
         autorun(() => {
@@ -54,11 +54,13 @@ export default function PlayerBar(props) {
                         Advarsel! Dette vil resette streaken til 0.
                     </DialogContentText>
                     <TextField
+                        error={!!errors.username}
                         autoFocus
                         margin="dense"
                         name="username"
                         label="Username"
                         inputRef={register({ required: true })}
+                        helperText={errors.username ? "Add a valid name to submit streak" : ""}
                     />
                 </DialogContent>
                 <DialogActions>
