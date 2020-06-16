@@ -34,7 +34,28 @@ const ord = [
     "SJOKOLADEFROSK",
     "ALBUS HUMLESNURR",
     "BASILLISK",
-    "SONDRE POTTER"
+    "SONDRE POTTER",
+    "HOGG",
+    "HEDVIG",
+    "DEN TRINNE DAME",
+    "NESTEN HODELØSE NIKK",
+    "STØNNESTINA",
+    "DUDLEIF DUMLING",
+    "LILLY POTTER",
+    "HUSNISSE",
+    "NOLDUS",
+    "REMUS LUPUS",
+    "CHO CHANG",
+    "FREDRIK DJERVELL",
+    "NILUS LANGBALLE",
+    "RONNY WILTERSEN",
+    "BELLATRIX DEMONS",
+    "DIAGONALLMENNINGEN",
+    "GALTVORT",
+    "GALTVANG",
+    "GNOM",
+    "RUMPELDUNK",
+    
 ]
 
 export default function(){
