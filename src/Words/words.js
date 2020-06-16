@@ -55,7 +55,17 @@ const ord = [
     "GALTVANG",
     "GNOM",
     "RUMPELDUNK",
-    
+    "OLDSTAVEN",
+    "AZKABAN",
+    "BEFALIO",
+    "GYGRID",
+    "MALACRUXER",
+    "NAGINI",
+    "USYNLIGHETSKAPPEN",
+    "GULLSNOPP",
+    "FØNIKSORDENEN",
+    "LUMOS",
+    "VINGARDIUM LEVIOSA"
 ]
 
 export default function(){
