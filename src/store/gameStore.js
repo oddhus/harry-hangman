@@ -32,8 +32,6 @@ export function gameStore() {
       this.wrongGuesses = []
       this.win = false
       this.loss = false
-      this.isAdded = false
-      this.errorMessage = null
     },
     addLetter(letter){
       if(this.word.indexOf(letter) > -1 && !(this.correctGuesses.indexOf(letter) > -1)){
@@ -42,6 +40,7 @@ export function gameStore() {
       } else if (!(this.word.indexOf(letter) > -1) && !(this.wrongGuesses.indexOf(letter) > -1)){
         this.wrongGuesses.push(letter)
         this.attempts--
+        this.totalAttempts++
       }
       this.checkWin()
     },

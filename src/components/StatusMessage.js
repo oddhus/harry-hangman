@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CustomizedSnackbars(props) {
+export default function CustomizedSnackbars() {
     const classes = useStyles();
     const { game } = useStore()
     const [open, setOpen] = useState(false)
@@ -57,7 +57,7 @@ export default function CustomizedSnackbars(props) {
 
     return useObserver(() => (
         <div className={classes.root}>
-            {game.isAdded ? successMessage : errorMessage}
+            {!game.errorMessage ? successMessage : errorMessage}
         </div>
     ))
 }

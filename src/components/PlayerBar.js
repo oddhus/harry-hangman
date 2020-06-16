@@ -43,7 +43,7 @@ export default function PlayerBar(props) {
 
     return useObserver(() => (
         <React.Fragment>
-            <Button variant="contained" color="secondary" onClick={handleClickOpen} disabled={game.streak === 0 && !game.isAdded}>
+            <Button variant="contained" color="secondary" onClick={handleClickOpen} disabled={game.streak === 0 || game.isAdded}>
                 Lagre Streak
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

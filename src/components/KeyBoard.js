@@ -17,7 +17,7 @@ letters.push('Æ', 'Ø', 'Å')
 
 export default function Keyboard() {
   const classes = useStyles();
-  const store = useStore()
+  const { game } = useStore()
 
   return useObserver(() => (
     <Box pt={[1, 2.5, 3]}>
@@ -28,8 +28,13 @@ export default function Keyboard() {
               <Button
                 className={classes.button}
                 variant="outlined"
-                onClick={() => store.game.addLetter(letter)}
-                disabled={(store.game.correctGuesses.includes(letter) || store.game.wrongGuesses.includes(letter))}
+                onClick={() => {
+                  if (game.loss || game.win){
+                    return
+                  }
+                  game.addLetter(letter)
+                }}
+                disabled={(game.correctGuesses.includes(letter) || game.wrongGuesses.includes(letter))}
               >
                 <Typography variant="h6">{letter}</Typography>
               </Button>

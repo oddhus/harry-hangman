@@ -9,6 +9,7 @@ function NavBar() {
   const { game, ui } = useStore()
 
   function submitStreak(data) {
+    game.errorMessage = null
     if (game.streak > 0 && !game.isAdded) {
       firebase.db.collection('scores').add({
         username: data.username,
@@ -19,8 +20,9 @@ function NavBar() {
         game.isAdded = true
         game.startNewRound()
       }).catch((error) => {
-        game.isAdded = false
         game.errorMessage = error.message
+      }).finally(()=> {
+        game.isAdded = false
       })
     }
   }
@@ -30,7 +32,7 @@ function NavBar() {
       <Grid container direction="row" justify="space-between" spacing={3} alignItems="center">
         <Grid item xs>
           <Box display="flex" justifyContent="center">
-            <Button variant="contained" onClick={() => {game.startNewRound(); game.isAdded = false}} color={ui.nyttOrdButton(game.loss, game.win)} disabled={!(game.loss || game.win)}>Nytt ord</Button>
+            <Button variant="contained" onClick={game.startNewRound} color={ui.nyttOrdButton(game.loss, game.win)} disabled={!(game.loss || game.win)}>Nytt ord</Button>
           </Box>
         </Grid>
         <Grid item xs>
