@@ -1,6 +1,6 @@
 const ord = [
     "HARRY POTTER",
-    "HERMINE",
+    "HERMINE GRANG",
     "SEVERUS SLUR",
     "AVADA KADAVRA",
     "FORSVAR MOT SVARTEKUNSTER",
@@ -65,7 +65,14 @@ const ord = [
     "GULLSNOPP",
     "FØNIKSORDENEN",
     "LUMOS",
-    "VINGARDIUM LEVIOSA"
+    "VINGARDIUM LEVIOSA",
+    "PROFESSOR KRENGLE",
+    "MINERVA MCSNURP",
+    "MYSTERIEKAMMERET",
+    "ILDBEGERET",
+    "SALAZAR SMYGARD",
+    "OLIVANDER",
+    "RITA SLITA"
 ]
 
 export default function(){
