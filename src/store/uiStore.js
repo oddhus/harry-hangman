@@ -2,7 +2,7 @@ export function uiStore(){
   return {
     statusColor: "white",
     streakColors: ["white", "#fffde7", "#fff9c4", "#fff59d", "#fff176", "#ffee58", "#ffeb3b", "#fdd835", "#fbc02d", "#f9a825", "#f57f17"],
-    attemptColors: ["#ef5350","#ef5350","#ffca28","#d4e157","#d4e157","#9ccc65"],
+    attemptColors: ["#ef5350","#ef5350","#ffca28","#ffca28","#d4e157","#d4e157","#d4e157","#9ccc65"],
     nyttOrdButton(win, loss){
       if(win || loss){
         return "primary"
