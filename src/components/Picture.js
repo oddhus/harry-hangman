@@ -7,6 +7,8 @@ import statusImg3 from '../assets/3.svg'
 import statusImg4 from '../assets/4.svg'
 import statusImg5 from '../assets/5.svg'
 import statusImg6 from '../assets/6.svg'
+import statusImg7 from '../assets/7.svg'
+import statusImg8 from '../assets/8.svg'
 import { useObserver } from 'mobx-react-lite'
 import { useStore } from '../store/store';
 
@@ -26,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const images = [statusImg6, statusImg5, statusImg4, statusImg3, statusImg2, statusImg1]
+const images = [statusImg8, statusImg7,statusImg6, statusImg5, statusImg4, statusImg3, statusImg2, statusImg1]
 
 export default function Status() {
   const classes = useStyles()
@@ -36,7 +38,7 @@ export default function Status() {
     <Grid container justify="center">
       <Grid item xs={6}>
         <Paper className={classes.paper} elevation={1}>
-          <img src={game.loss ? statusImg6 : (images[game.attempts] || statusImg1)} alt="Status" className={classes.media} />
+          <img src={game.loss ? statusImg8 : (images[game.attempts] || statusImg1)} alt="Status" className={classes.media} />
         </Paper>
       </Grid>
 

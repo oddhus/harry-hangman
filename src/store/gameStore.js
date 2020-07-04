@@ -6,7 +6,7 @@ export function gameStore() {
     streak: 0,
     win: false,
     loss: false,
-    attempts: 5,
+    attempts: 7,
     totalAttempts: 0,
     word: ['h','e','i'],
     hiddenWord: ['h','e','i'],
@@ -28,7 +28,7 @@ export function gameStore() {
         this.totalAttempts = 0
       }
       this.setNewWord()
-      this.attempts = 5
+      this.attempts = 7
       this.correctGuesses = []
       this.wrongGuesses = []
       this.win = false
