@@ -25,6 +25,7 @@ export function gameStore() {
     startNewRound(){
       if (this.loss || this.isAdded){
         this.streak = 0
+        this.totalAttempts = 0
       }
       this.setNewWord()
       this.attempts = 5
